@@ -1,6 +1,6 @@
 # select2-theme-bootstrap4
 
-![select2-theme-bootstrap4 version](https://img.shields.io/badge/select2--theme--bootstrap4-v1.0.2-brightgreen.svg)
+![select2-theme-bootstrap4 version](https://img.shields.io/badge/select2--theme--bootstrap4-v1.1.0-brightgreen.svg)
 [![License](http://img.shields.io/badge/License-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 
 A [Select2](https://select2.github.io/) v4 [Theme](https://select2.github.io/examples.html#themes) for Bootstrap 4
@@ -55,6 +55,11 @@ $.fn.select2.defaults.set( "theme", "bootstrap" );
 ```
 
 ### Changelog
+
+##### 1.1.0
+* Select2 4.1.x support. With 4.1 also pass `selectionCssClass: ':all:'` (renamed from `containerCssClass`)
+* Demo pages load the full jQuery build, fixing the AJAX examples
+* Dropped unpublished `grunt-stamp` dependency
 
 ##### 1.0.2
 * `libsass` friendly division by 2

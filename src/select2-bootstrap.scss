@@ -71,6 +71,10 @@ $s2bs-padding-small-horizontal: $input-btn-padding-x-sm !default;
 $s2bs-padding-base-vertical: $input-btn-padding-y  !default;
 $s2bs-padding-large-vertical: $input-btn-padding-y-lg !default;
 $s2bs-padding-small-vertical: $input-btn-padding-y-sm !default;
+// Vertically centers the text in Select2 v4.1's borderless <textarea> search field
+$s2bs-search-padding-base-vertical: add($s2bs-padding-base-vertical, $border-width) !default;
+$s2bs-search-padding-large-vertical: add($s2bs-padding-large-vertical, $border-width) !default;
+$s2bs-search-padding-small-vertical: add($s2bs-padding-small-vertical, $border-width) !default;
 $s2bs-line-height-base: $input-btn-line-height !default;
 $s2bs-line-height-large: $input-btn-line-height !default;
 $s2bs-line-height-small: $input-btn-line-height !default;
@@ -549,6 +553,38 @@ $s2bs-form-control-transition: $input-transition !default;
         margin: -$border-width 0; // Compensate for input borders included in height
         min-width: 5em;
       }
+
+      textarea.select2-search__field {
+        /**
+         * Select2 v4.1 swaps the inline search <input> for a <textarea>,
+         * which top-aligns its text where the <input> centered it. Its base
+         * styles also force `font-family: sans-serif` and
+         * `::placeholder { line-height: normal }` on it.
+         */
+        font-family: inherit;
+        padding-top: $s2bs-search-padding-base-vertical;
+        padding-bottom: $s2bs-search-padding-base-vertical;
+
+        &::placeholder {
+          line-height: inherit;
+        }
+      }
+    }
+
+    /**
+     * Select2 v4.1 renders the inline search as a direct child of the
+     * selection - a sibling after the choices <ul> - instead of a floated
+     * <li> inside it. Dissolve the <ul> box so choices and search share
+     * one float flow again, and contain the floated choices here instead.
+     * Both selectors only match the v4.1 markup; v4.0.x is unaffected.
+     */
+
+    &:has(> .select2-search--inline) {
+      overflow: hidden;
+
+      .select2-selection__rendered {
+        display: contents;
+      }
     }
 
     .select2-selection__choice__remove {
@@ -557,6 +593,9 @@ $s2bs-form-control-transition: $input-transition !default;
       display: inline-block;
       font-weight: bold;
       margin-right: $s2bs-padding-base-vertical * .5;
+      background-color: transparent;
+      border: none;
+      padding: 0;
 
       &:hover {
         color: $s2bs-remove-choice-hover-color;
@@ -621,6 +660,11 @@ $s2bs-form-control-transition: $input-transition !default;
       line-height: $s2bs-line-height-small;
     }
 
+    .select2-search--inline textarea.select2-search__field {
+      padding-top: $s2bs-search-padding-small-vertical;
+      padding-bottom: $s2bs-search-padding-small-vertical;
+    }
+
     .select2-selection__clear {
       margin-top: $s2bs-padding-small-vertical;
     }
@@ -667,6 +711,11 @@ $s2bs-form-control-transition: $input-transition !default;
       font-size: $s2bs-font-size-large;
       height: $s2bs-input-height-large;
       line-height: $s2bs-line-height-large;
+    }
+
+    .select2-search--inline textarea.select2-search__field {
+      padding-top: $s2bs-search-padding-large-vertical;
+      padding-bottom: $s2bs-search-padding-large-vertical;
     }
 
     .select2-selection__clear {
@@ -830,8 +879,15 @@ $s2bs-form-control-transition: $input-transition !default;
     display: flex;
     flex: 1 1 auto;
 
-    > .select2-selection.form-control {
+    /**
+     * Select2 v4.1 dropped the containerCssClass option (renamed to
+     * selectionCssClass), so the selection no longer carries .form-control
+     * and its `width: 100%` - state it here for both versions.
+     */
+
+    > .select2-selection {
       float: none;
+      width: 100%;
     }
   }
 
