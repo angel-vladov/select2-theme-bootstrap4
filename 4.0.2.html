@@ -52,10 +52,30 @@
 						<a class="nav-link" href="4.0.5.html">4.0.5</a>
 					</li>
 				
+					<li class="nav-item">
+						<a class="nav-link" href="4.0.10.html">4.0.10</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="4.0.11.html">4.0.11</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="4.0.12.html">4.0.12</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="4.0.13.html">4.0.13</a>
+					</li>
+				
+					<li class="nav-item">
+						<a class="nav-link" href="4.1.0.html">4.1.0</a>
+					</li>
+				
 			</ul>
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" href="https://github.com/select2/select2-bootstrap-theme">
+					<a class="nav-link" href="https://github.com/angel-vladov/select2-theme-bootstrap4">
 						<i class="fa fa-github"></i>
 						GitHub
 					</a>
@@ -2021,7 +2041,7 @@
 		<div class="footer">
 	<div class="container">
 		<ul class="footer-links">
-	<li class="version"><span class="hidden-xs">Currently</span> v1.0.0</li>
+	<li class="version"><span class="hidden-xs">Currently</span> v1.1.0</li>
 	<li>&middot;</li>
 	<li><a href="https://github.com/angel-vladov/select2-theme-bootstrap4">GitHub</a></li>
 	<li>&middot;</li>
@@ -2037,8 +2057,8 @@
 </div>
 
 
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT"
         crossorigin="anonymous">
 </script>
 
@@ -2071,14 +2091,16 @@
 			$( ".select2-single, .select2-multiple" ).select2( {
 				placeholder: placeholder,
 				width: null,
-				containerCssClass: ':all:'
+				containerCssClass: ':all:',
+				selectionCssClass: ':all:' // Select2 4.1+ (renamed from containerCssClass)
 			} );
 
 			$( ".select2-allow-clear" ).select2( {
 				allowClear: true,
 				placeholder: placeholder,
 				width: null,
-				containerCssClass: ':all:'
+				containerCssClass: ':all:',
+				selectionCssClass: ':all:' // Select2 4.1+ (renamed from containerCssClass)
 			} );
 
 			// @see https://select2.github.io/examples.html#data-ajax
@@ -2111,6 +2133,7 @@
 			$( ".js-data-example-ajax" ).select2({
 				width : null,
 				containerCssClass: ':all:',
+				selectionCssClass: ':all:', // Select2 4.1+ (renamed from containerCssClass)
 				ajax: {
 					url: "https://api.github.com/search/repositories",
 					dataType: 'json',
