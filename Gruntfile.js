@@ -201,6 +201,20 @@ module.exports = function(grunt) {
 
   });
 
+  // Prepends the license banner to built files. Inline replacement for the
+  // grunt-stamp plugin, which was unpublished from npm in August 2026.
+  grunt.registerMultiTask('stamp', function() {
+    var banner = this.options({banner: ''}).banner;
+    this.filesSrc.forEach(function(filepath) {
+      if (!grunt.file.isFile(filepath)) { return; }
+      var file = grunt.file.read(filepath).replace(/\r?\n$/, '');
+      if (banner && file.indexOf(banner) !== 0) {
+        file = banner + grunt.util.linefeed + file;
+      }
+      grunt.file.write(filepath, file + grunt.util.linefeed);
+    });
+  });
+
   // Default tasks.
   grunt.registerTask('buildTheme', ['sass', 'postcss', 'cssmin', 'stamp', 'copy'])
   grunt.registerTask('build', ['buildTheme', 'jekyll:build']);
